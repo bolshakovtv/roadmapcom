@@ -22,9 +22,9 @@
 
 * Terraform: VPC/подсети, NAT, брандмауэр, LB, dev/stage k8s (managed/cluster-api/kubespray), PV-класс (NVMe), DNS зоны.
 * Ansible: базовый образ ОС (CIS-hardening light), users/SSH, firewalld/nftables baseline, journald/rsyslog, node-exporter, crond.
-* GitLab (омнибус/Helm в k8s): группа/проекты, **раздельная видимость** (developers не видят чужие проекты), protected branches/tags, артефакты.
+* GitLab: группа/проекты, **раздельная видимость** (developers не видят чужие проекты), protected branches/tags, артефакты.
 * GitLab Runners в k8s (separate executor, изоляция по projects/tag).
-* **Nexus**: hosted docker/helm/raw; роли/LDAP(опц.), ретенции, proxy к Docker Hub, включить malware/viruses scan (если доступно).
+* **Nexus**: hosted docker/helm/raw; роли/LDAP(опц.), ретенции, proxy к Docker Hub.
 * БД dev: PostgreSQL single + Redis (1 экземпляр), PV + бэкап-крон (pg\_dump + рестор-тест).
 * Док: конвенции Dockerfile (multi-stage, non-root, distroless), .env → values.yaml/Secrets.
 
@@ -53,7 +53,6 @@
 
 * GitLab CI: шаблоны `.gitlab-ci.yml` (build/test/lint/scan/push), кэш, SBOM (syft), Trivy scan, семантические версии.
 * Разделение проектов: группы/сабгруппы, роли Maintainer/Developer, видимость **private** по умолчанию, доступ к общим shared libs по токенам.
-* Review apps: ephemeral namespace per MR; auto-GC на merged/closed.
 * Эмуляторы: headless **Android Emulator** image в CI (Linux, KVM), smoke-тесты; опция внешнего Device Farm.
 * Базовые тесты производительности (k6) в CI (sanity).
 
@@ -70,7 +69,7 @@
 * Firewalld/nftables роли Ansible + закрыть БД-порты наружу, оставить **только docker/k8s сети и whitelisted IP**; для кросс-серверных микросервисов — IP allowlist.
 * **WireGuard** VPN для dev/stage; адресные пулы/ACL; onboarding скрипт.
 * **IP-ban**: таблица в PostgreSQL → k8s CronJob (каждые N минут) генерит ipset/ConfigMap denylist для Ingress и хостов; Ansible таска для вне-k8s машин.
-* Секреты: переход на External Secrets + Vault (опц.) или закрепляем SOPS.
+* Секреты: переход на External Secrets + Vault (опц.).
 
 **определение готовности:** скан из внешней сети не видит БД/Redis; IP из ban-таблицы блокируется в течение X минут; гейтвеи маршрутизируют на разные инстансы; VPN работает.
 
