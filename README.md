@@ -62,12 +62,12 @@
 
 **Цели:** подготовить прод-уровень БД/Redis.
 
-; * PostgreSQL: HA (Patroni/StackGres) **или** single + реплика (зависит от SLA); **pgBackRest**, PITR, тест восстановления. (на будущее)
-; * Redis: Sentinel/Cluster (по нагрузке). Один общий или несколько инстансов для микросервисов — решение по метрикам. ()
-; * Пул соединений для app: pgbouncer; параметры (work\_mem, shared\_buffers) по профилю.
-; * Нагрузочное тестирование: pgbench/redis-benchmark + сценарии из приложения; таргеты (P95 latency, TPS).
-; * Terraform: VPC/подсети, NAT, брандмауэр, LB, dev/stage k8s (managed/cluster-api/kubespray), PV-класс (NVMe), DNS зоны.
-; * **Nexus**: hosted docker/helm/raw; роли/LDAP(опц.), ретенции, proxy к Docker Hub.
+* PostgreSQL: HA (Patroni/StackGres) **или** single + реплика (зависит от SLA); **pgBackRest**, PITR, тест восстановления. (на будущее)
+* Redis: Sentinel/Cluster (по нагрузке). Один общий или несколько инстансов для микросервисов — решение по метрикам. ()
+* Пул соединений для app: pgbouncer; параметры (work\_mem, shared\_buffers) по профилю.
+* Нагрузочное тестирование: pgbench/redis-benchmark + сценарии из приложения; таргеты (P95 latency, TPS).
+* Terraform: VPC/подсети, NAT, брандмауэр, LB, dev/stage k8s (managed/cluster-api/kubespray), PV-класс (NVMe), DNS зоны.
+* **Nexus**: hosted docker/helm/raw; роли/LDAP(опц.), ретенции, proxy к Docker Hub.
 * Cilium + NetworkPolicy baseline; PodSecurity/PodDisruptionBudgets; liveness/readiness стартовый шаблон в Helm chart.
 * **Argo CD** bootstrap: app-of-apps; окружения dev/stage; policy RBAC (читатели/деплойеры).
 * Helm-чарты каркаса для микросервисов (общий chart lib/copybara).
